@@ -1,0 +1,14 @@
+services:
+  mssql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: 1
+      MSSQL_SA_PASSWORD: Sysadmin123$
+    healthcheck:
+      test: ['CMD', 'sqlcmd', '-U', sa, '-P', 'Sysadmin123$', '-Q', 'SELECT 1']
+      interval: 10s
+      retries: 5
