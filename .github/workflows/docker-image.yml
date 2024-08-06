@@ -31,6 +31,7 @@ jobs:
       id: meta
       with:
         images: helloworld65/vpic-mssql
+        tags: latest sha git-ref
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v6.5.0
