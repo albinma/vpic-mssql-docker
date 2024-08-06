@@ -25,22 +25,20 @@ FROM mcr.microsoft.com/mssql/server:2022-latest
 USER root
 
 # Set the build environment variables
-ENV DEFAULT_MSSQL_SA_PASSWORD=myStrongDefaultPassword
+ENV DEFAULT_MSSQL_SA_PASSWORD=myStrongDefaultPassword123$
 ENV ACCEPT_EULA=Y
 
 # Create a directory for the backups
 RUN mkdir /var/opt/mssql/backups
 
 # Copy the database backup to the container
-COPY --from=unzipper "/usr/download/" "/var/opt/mssql/backups/"
+COPY --from=unzipper "/usr/download/*.bak" "/var/opt/mssql/backups/vpic.bak"
 COPY restore.sh entrypoint.sh /opt/mssql/bin/
 
 # Grant permissions for the restore script and entrypoint
 RUN chmod +x /opt/mssql/bin/restore.sh /opt/mssql/bin/entrypoint.sh
-RUN chown -R mssql:root /var/opt/mssql/backups && \
-    chmod 0755 /var/opt/mssql/backups
-
-
+RUN chown -R mssql:root /var/opt/mssql/backups
+RUN chmod 0755 /var/opt/mssql/backups
 
 USER mssql
 
