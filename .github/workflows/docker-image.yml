@@ -31,7 +31,9 @@ jobs:
       id: meta
       with:
         images: helloworld65/vpic-mssql
-        tags: latest, ${{ github.sha }}, 2024-07
+        tags: |
+          # set latest tag for default branch
+          type=raw,value=latest,enable={{is_default_branch}}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v6.5.0
