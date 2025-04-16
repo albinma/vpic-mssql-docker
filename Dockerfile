@@ -5,7 +5,7 @@ FROM alpine:latest AS unzipper
 USER root
 
 # Set the build environment variables
-ENV VPIC_BACKUP_ZIP_FILE_NAME=vPICList_lite_2025_02
+ENV VPIC_BACKUP_ZIP_FILE_NAME=vPICList_lite_2025_03
 
 # Install the necessary tools
 RUN apk add --no-cache unzip curl
